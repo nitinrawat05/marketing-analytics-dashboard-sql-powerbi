@@ -1,139 +1,197 @@
-# 📊 Marketing Analytics Dashboard — Power BI
+# 📊 Marketing Performance Dashboard
+### Power BI | Multi-Page Analytics Dashboard
 
-An end-to-end Marketing Analytics Dashboard built in Power BI to analyze campaign performance, optimize marketing spend, and track funnel efficiency across **20 campaigns, 8 channels, and 2 years (2023–2024)**.
-
-> Built on a star schema with 4,648 daily records and 35+ DAX measures.
-
----
-
-## 🎯 Objectives
-
-- Analyze marketing performance across channels and campaigns
-- Optimize budget allocation using ROI-driven metrics
-- Identify high-performing and underperforming campaigns
-- Track user journey from Impressions → Clicks → Conversions
+> A comprehensive marketing analytics solution built in Power BI, covering executive KPIs, channel efficiency, funnel conversion analysis, time-series trends, and budget optimization — all in a single interactive report.
 
 ---
 
-## 🗂️ Data Model
+## 🗂️ Dashboard Pages Overview
 
-Star schema — single-direction filters (Dim → Fact):
+### 1. 🏠 Executive Overview
+**Purpose:** High-level summary for senior stakeholders.
+
+| KPI | Value |
+|-----|-------|
+| Total Revenue | $410.82M |
+| Total Profit | $307.17M |
+| ROAS | 3.96 |
+| CPA | 217.17 |
+| Profit Margin | 74.8% |
+| Total Spend | $103.65M |
+
+**Visuals Included:**
+- Total Revenue Over Time (Line Chart)
+- Profit by Channel (Horizontal Bar)
+- Total Revenue by Channel (Horizontal Bar)
+- Total Spend and Revenue by Channel (Grouped Bar)
+
+---
+
+### 2. 📡 Channel Performance Analysis
+**Purpose:** Deep dive into per-channel efficiency metrics.
+
+**Visuals Included:**
+- ROAS by Channel (Horizontal Bar — Green)
+- CPA by Channel (Horizontal Bar — Red)
+- Spend vs Revenue Bubble Chart (Channel Efficiency)
+- Channel Summary Table: Revenue, Spend, Profit, ROAS
+
+**Top Insight:** Email achieves the highest ROAS (6.42), while LinkedIn Ads has the highest CPA (~900+).
+
+---
+
+### 3. 🔁 Funnel Analysis
+**Purpose:** Track the customer journey from Impression to Conversion.
+
+| Metric | Value |
+|--------|-------|
+| Total Impressions | 239M |
+| Total Clicks | 11M |
+| Total Conversions | 477K |
+| CTR | 4.7% |
+| Conversion Rate | 4.23% |
+| Clicks → Conversions Drop-off | **95.77%** |
+| Impressions → Clicks Drop-off | **95.27%** |
+
+**Visuals Included:**
+- Customer Acquisition Funnel (Waterfall/Bar)
+- CTR by Channel (Bar)
+- Conversion Rate by Channel (Bar)
+- Spend vs Conversions Scatter (Channel Efficiency)
+
+**Key Insight:** The biggest drop-off occurs between Clicks and Conversions (~93%). Email leads in both CTR and conversion rate.
+
+---
+
+### 4. 📈 Time Series & Trends
+**Purpose:** Analyze performance over time (2023–2024).
+
+**Visuals Included:**
+- Revenue Trend Over Time (Line Chart with benchmark line)
+- CTR and Conversion Rate by Year-Month (Dual-line)
+- Total Revenue by Month and Channel (Multi-line)
+
+**Key Insights:**
+- Revenue shows a **declining trend** over the period — indicates potential budget reallocation or reduced campaign performance.
+- CTR improved by **8.3%** over time — better ad engagement.
+- **Email** is the top-performing channel with steady revenue growth.
+
+---
+
+### 5. 💰 Budget Optimization
+**Purpose:** Strategic spend allocation recommendations using quadrant analysis.
+
+**Visuals Included:**
+- Spend vs Revenue Quadrant Chart (Scale / Monitor / Invest / Reduce)
+- ROAS by Channel (Horizontal Bar)
+- CPA by Channel (Horizontal Bar)
+- Sum of Spend and Conversions by Month (Dual-axis Line)
+
+**Quadrant Classification:**
+| Quadrant | Channels | Recommendation |
+|----------|----------|----------------|
+| 🟢 Scale | Google Ads | High Spend, High Revenue — Keep investing |
+| 🟡 Invest More | Facebook Ads | Low Spend, Low Revenue — Increase budget |
+| 🟠 Monitor | Email, Affiliate | Low Spend, Low Revenue — Optimize |
+| 🔴 Reduce | (High Spend, Low Revenue) | Cut budget |
+
+**Key Recommendations:**
+- 📧 Email delivers highest returns → **Prioritize budget allocation**
+- 🔍 Paid Search shows inefficiency → **Optimize targeting, reduce waste**
+- 🤝 Affiliate enables low-cost conversions → **Scale for efficient growth**
+
+---
+
+## 🧭 Navigation Structure
+
+The dashboard uses a **left sidebar navigation** with 5 clearly labeled pages:
 
 ```
-Dim_Campaign  ──┐
-Dim_Channel   ──┤──► Fact_Marketing (4,648 rows)
-Dim_Geography ──┤
-Date_Table    ──┘
-```
-
-**Source:** CSV flat files loaded via Power Query
-
----
-
-## 📊 Key Metrics
-
-`Revenue` · `Conversions` · `CTR` · `Conversion Rate` · `ROAS` · `CPA` · `CPC` · `Profit Margin`
-
----
-
-## 📌 Dashboard Pages
-
-### 1. Executive Overview
-- KPI cards with YoY growth indicators
-- Revenue vs Spend trend (dual axis)
-- Revenue by Channel (donut) + City map
-
-### 2. Channel Performance
-- ROAS and CPA by channel
-- Revenue contribution analysis
-- Top vs underperforming channel identification
-
-### 3. Funnel Analysis
-- Impressions → Clicks → Conversions funnel
-- Drop-off rate at each stage
-- Conversion efficiency tracking
-
-### 4. Time Series & Trends
-- Revenue MTD vs Last Year
-- CTR & Conversion Rate trends over time
-- MoM growth %
-
-### 5. 🔥 Budget Optimization — Quadrant Analysis
-Scatter chart that segments every campaign into 4 action zones:
-
-| Quadrant | Spend | Revenue | Action |
-|---|---|---|---|
-| Scale | High | High | Increase budget |
-| Invest More | Low | High | Scale up |
-| Reduce | High | Low | Cut or optimize |
-| Monitor | Low | Low | Watch closely |
-
----
-
-## 🧠 DAX Measures (35+)
-
-| Category | Measures |
-|---|---|
-| Core KPIs | Revenue, Spend, Clicks, Impressions, Conversions |
-| Derived | ROAS, CPA, CPC, CTR, Conversion Rate, Profit Margin % |
-| Time Intelligence | YoY %, MTD, QTD, YTD, Rolling 30-Day |
-| Ranking | RANKX by Revenue & ROAS, Top Channel/Campaign |
-| Efficiency Score | Weighted: ROAS 50% + CVR 30% + Volume 20% |
-| KPI Status | 🟢🟡🟠🔴 ROAS bands, Growth Arrow, CTR Benchmark |
-| What-If | Simulated Spend / Revenue / ROAS via slicer |
-
----
-
-## 🎨 Design
-
-- Dark premium theme (`#0F172A` navy, `#6366F1` indigo accent)
-- Sidebar navigation for multi-page UX
-- KPI cards with conditional growth indicators
-- Drill-through pages for campaign/geo deep-dives
-- Decomposition tree for root-cause analysis
-
----
-
-## 🛠️ Tools
-
-Power BI · DAX · Power Query (M) · CSV
-
----
-
-## 🚀 Getting Started
-
-```
-1. Clone the repo
-2. Open marketing_analytics.pbix in Power BI Desktop (June 2024+)
-3. Point data source to /data folder if prompted
-4. Refresh — all relationships and measures load automatically
+├── Executive Dashboard
+├── Channel Performance
+├── Funnel Analysis
+├── Time Series & Trends
+└── Budget Optimization
 ```
 
 ---
 
-## 🔮 Future Improvements
+## 🛠️ Tools & Technologies
 
-- [ ] **Forecasting** — integrate Power BI's built-in time series forecast or connect Azure ML
-- [ ] **Row-Level Security (RLS)** — restrict data access by region or channel manager
-- [ ] **Real-time data** — connect to a live database (PostgreSQL / Azure SQL) instead of CSV
-- [ ] **Budget vs Actual** — add a budget target table and track variance
-- [ ] **Anomaly Detection** — use Power BI's built-in anomaly highlighting on trend charts
-- [ ] **Export to PDF** — scheduled report subscription for stakeholders
-
----
-
-## 💡 Outcome
-
-The dashboard enables stakeholders to quickly identify:
-- Where to **scale** marketing spend
-- Where to **reduce** inefficiencies
-- Which channels drive the most value
+| Tool | Usage |
+|------|-------|
+| **Power BI Desktop** | Report creation & publishing |
+| **DAX** | KPI calculations, ROAS, CPA, Profit Margin |
+| **Power Query (M)** | Data transformation & shaping |
+| **Custom Visuals** | Funnel chart, Scatter/Bubble chart |
 
 ---
 
-## 🔗 Author
+## 📐 Data Model Assumptions
 
-**Nitin Rawat** — Data Analyst / BI Analyst
+- Data spans **January 2023 – December 2024**
+- Channels: Google Ads, Facebook Ads, Email, Affiliate, Instagram Ads, YouTube Ads, LinkedIn Ads
+- Regions available as slicer (East, West, North, South, All)
+- Metrics tracked: Impressions, Clicks, Conversions, Spend, Revenue, Profit
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/nitin-rawat-a38536270)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-black)](https://github.com/nitinrawat05)
+---
+
+## 📊 Dashboard Level Assessment
+
+### ⭐⭐⭐⭐☆ — **Advanced / Professional Level**
+
+| Criteria | Rating | Notes |
+|----------|--------|-------|
+| **Complexity** | ⭐⭐⭐⭐☆ | 5-page multi-tab structure, cross-page navigation |
+| **DAX Depth** | ⭐⭐⭐⭐☆ | ROAS, CPA, Profit Margin, Drop-off % are non-trivial measures |
+| **Visualization Variety** | ⭐⭐⭐⭐⭐ | Line, Bar, Bubble, Funnel, Scatter, Quadrant, KPI cards |
+| **Design & UX** | ⭐⭐⭐⭐☆ | Clean dark sidebar nav, consistent color palette (green/red/blue) |
+| **Business Insight** | ⭐⭐⭐⭐⭐ | Actionable insights embedded directly in the report |
+| **Interactivity** | ⭐⭐⭐⭐☆ | Date slicer, Region slicer, cross-filtering |
+| **Storytelling** | ⭐⭐⭐⭐⭐ | Clear narrative flow: Overview → Deep Dive → Funnel → Trends → Action |
+
+**Overall: Advanced Portfolio-Grade Dashboard** — suitable for a Data Analyst, BI Developer, or Marketing Analyst role.
+
+---
+
+## 💡 Key Insights Summary
+
+| # | Insight |
+|---|---------|
+| 1 | **Email is the most efficient channel** — highest ROAS (6.42) and lowest CPA |
+| 2 | **Google Ads drives the most absolute revenue** (~155M profit), worth scaling |
+| 3 | **95.77% drop-off between Clicks and Conversions** — landing page optimization needed |
+| 4 | **Revenue is declining over time** — investigate budget reallocation since mid-2023 |
+| 5 | **LinkedIn & YouTube Ads** have very high CPA (800–900+) — review ROI |
+| 6 | **Affiliate is underutilized** — low spend, solid returns, room to scale |
+| 7 | **CTR improved 8.3%** — ad creatives and targeting are improving even if revenue dips |
+| 8 | **74.8% Profit Margin** is exceptionally strong for a marketing operation |
+
+---
+
+## 📁 File Structure
+
+```
+Marketing-Dashboard/
+│
+├── MarketingDashboard.pbix        # Main Power BI file
+├── README.md                      # This file
+├── data/
+│   └── marketing_data.csv         # Source dataset
+└── screenshots/
+    ├── 01_executive_overview.png
+    ├── 02_channel_performance.png
+    ├── 03_funnel_analysis.png
+    ├── 04_time_series.png
+    └── 05_budget_optimization.png
+```
+
+---
+
+## 👤 Author
+
+Built as part of a marketing analytics portfolio project demonstrating end-to-end BI development — from data modeling and DAX to visual design and insight storytelling.
+
+---
+
+*Built with ❤️ in Power BI*
